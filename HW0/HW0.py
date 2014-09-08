@@ -8,12 +8,26 @@ import matplotlib.pyplot as plt
 import csv
 
 attributes = genfromtxt("/Users/WayneLI/Desktop/CS5785/HW0/iris.data", usecols=(0,1,2,3) ,delimiter=',')
+species = genfromtxt("/Users/WayneLI/Desktop/CS5785/HW0/iris.data", dtype="|S15", usecols=(4) ,delimiter=',')
 
-xs = numpy.array([1, 2, 3, 4, 5, 6, 7]) 
-ys = numpy.array([3, 2, 5, 1, 3, 3, 2]) 
-colors = ["r","b","g"] 
-plt.scatter(xs, ys, c=colors)
+fig = plt.figure()
+colorR = ["r"]*50
+colorB = ["b"]*50
+colorG = ["g"]*50
+colors = numpy.concatenate((colorR, colorB, colorG))
+
+for i in range(0, 4):
+    xs = attributes[:,i]
+    for j in range(0, 4):
+        if i == j:
+            continue
+        else:
+            ys = attributes[:,j]
+            ax = fig.add_subplot(4, 4, i*4+j+1)
+            ax.scatter(xs, ys, c=colors)
+            
 plt.show()
+
 
 
 
