@@ -6,6 +6,7 @@ from matplotlib import *
 from numpy import*
 import matplotlib.pyplot as plt
 import csv
+import sys
 
 #initialize the colors for each species
 def initColors(species):
@@ -19,10 +20,13 @@ def initColors(species):
             colors.append('g')
     return colors
 
+#change the path to where you put your data file
+data = "/Users/WayneLI/Desktop/CS5785/HW0/iris.data"
+
 #read the length and width of each sample and push to a N x p dimentional matrix
-attributes = genfromtxt("/Users/WayneLI/Desktop/CS5785/HW0/iris.data", usecols=(0,1,2,3) ,delimiter=',')
+attributes = genfromtxt(data, usecols=(0,1,2,3) ,delimiter=',')
 #read the species and push to a p dimentional vector
-species = genfromtxt("/Users/WayneLI/Desktop/CS5785/HW0/iris.data", dtype="|S15", usecols=(4) ,delimiter=',')
+species = genfromtxt(data, dtype="|S15", usecols=(4) ,delimiter=',')
 
 #create the plot panel
 fig = plt.figure()  
