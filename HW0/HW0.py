@@ -1,12 +1,7 @@
 #!/usr/bin/python
 #%pylab inline
-import sklearn
-import skimage
 from matplotlib import *
-from numpy import*
-import matplotlib.pyplot as plt
-import csv
-import sys
+from numpy import *
 
 #initialize the colors for each species
 def initColors(species):
@@ -29,7 +24,7 @@ attributes = genfromtxt(data, usecols=(0,1,2,3) ,delimiter=',')
 species = genfromtxt(data, dtype="|S15", usecols=(4) ,delimiter=',')
 
 #create the plot panel
-fig = plt.figure()  
+fig = pyplot.figure()  
 #initialize the color for each species   
 colors = initColors(species)  
 
@@ -49,5 +44,5 @@ for i in range(0, 4):
 
 #set the layout and show    
 fig.tight_layout()        
-plt.show()
+pyplot.show()
 
