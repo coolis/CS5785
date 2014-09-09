@@ -1,6 +1,19 @@
+#************************************************************
+# Copyright @ Siyi Fan and Wen Li
+#
+# Instruction on running the program:
+# 1. Change the data path to where you locate your iris.data
+# 2. Remove and blank line at the end of iris.data
+# 3. Please run the program in Enthought python environment
+#    with matplolib and numpy library installed
+#
+# Note: no input validation and error checking implemented,
+#       please carefully follow the instruction
+#
+#************************************************************
 #!/usr/bin/python
 #%pylab inline
-from matplotlib import *
+import matplotlib.pyplot as pyplot
 from numpy import *
 
 #initialize the colors for each species
@@ -24,9 +37,9 @@ attributes = genfromtxt(data, usecols=(0,1,2,3) ,delimiter=',')
 species = genfromtxt(data, dtype="|S15", usecols=(4) ,delimiter=',')
 
 #create the plot panel
-fig = pyplot.figure()  
-#initialize the color for each species   
-colors = initColors(species)  
+fig = pyplot.figure()
+#initialize the color for each species
+colors = initColors(species)
 
 #plot each attribute against the other
 for i in range(0, 4):
@@ -42,7 +55,7 @@ for i in range(0, 4):
             ax = fig.add_subplot(4, 4, i*4+j+1)
             ax.scatter(xs, ys, c=colors)
 
-#set the layout and show    
-fig.tight_layout()        
+#set the layout and show
+fig.tight_layout()
 pyplot.show()
 
