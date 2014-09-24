@@ -62,8 +62,10 @@ if __name__ == '__main__':
         tdistance = float(line[9])
         try:
             #absolute displacement
-            trip = (ttime, ptime, tdistance, get_distance(plat,plong,dlat,dlong))
-            trips.append(trip)
+            distance = get_distance(plat,plong,dlat,dlong)
+            if distance < 50:
+                trip = (ttime, ptime, tdistance, distance)
+                trips.append(trip)
         except:
             error_count += 1
             print plong,plat,dlong,dlat
@@ -73,21 +75,14 @@ if __name__ == '__main__':
     
     data = numpy.asmatrix(trips)
     
-    data[:,3].sort()
-    #print "number of distances","maximum distance","minimum distance"
-    print len(data[:,3]),max(data[:,3]),min(data[:,3]) # distance is measured in miles
-    #"Top 50 distances, obvious outliers"
-    #pprint(trips[:50])  
     
-    
-    color = ['r'] * data.shape[0]
     #create the plot panel
     fig = pyplot.figure()
     ax = fig.add_subplot(3, 1, 1)
-    ax.scatter(data[:,0], data[:,1], c=color)
+    ax.scatter(data[:,0], data[:,1], c=['r'] * data.shape[0])
     ax = fig.add_subplot(3, 1, 2)
-    ax.scatter(data[:,0], data[:,2], c=color)
+    ax.scatter(data[:,0], data[:,2], c=['g'] * data.shape[0])
     ax = fig.add_subplot(3, 1, 3)
-    ax.scatter(data[:,0], data[:,3], c=color)
+    ax.scatter(data[:,0], data[:,3], c=['b'] * data.shape[0])
     pyplot.show()
 
