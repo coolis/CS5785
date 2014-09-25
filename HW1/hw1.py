@@ -13,6 +13,8 @@ from datetime import datetime
 
 dir = os.path.dirname(__file__)
 
+test = numpy.matrix([[1,2],[3,4]])
+
 def get_distance(lat1, long1, lat2, long2):
     # Convert latitude and longitude to
     # spherical coordinates in radians.
@@ -43,6 +45,16 @@ def get_distance(lat1, long1, lat2, long2):
     # MODIFIED TO return distance in miles
     return arc*3960.0
 
+def outlier_filter_simple(data, index, quantile):
+    #filt outlier by remove all the points larger than the quantile
+    list_index = []
+    
+    for i,d in enumerate(data):
+        if d.item(index) > quantile:
+            list_index.append(i)
+    return numpy.delete(data, list_index, 0)
+    
+
 if __name__ == '__main__':
     trips = []
     error_count  = 0
@@ -63,9 +75,8 @@ if __name__ == '__main__':
         try:
             #absolute displacement
             distance = get_distance(plat,plong,dlat,dlong)
-            if distance < 50:
-                trip = (ttime, ptime, tdistance, distance)
-                trips.append(trip)
+            trip = (ttime, ptime, tdistance, distance)
+            trips.append(trip)
         except:
             error_count += 1
             print plong,plat,dlong,dlat
@@ -74,7 +85,7 @@ if __name__ == '__main__':
     print error_count
     
     data = numpy.asmatrix(trips)
-    
+    data = outlier_filter_simple(data, 3, 50)
     
     #create the plot panel
     fig = pyplot.figure()
