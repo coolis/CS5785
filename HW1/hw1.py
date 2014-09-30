@@ -150,8 +150,8 @@ if __name__ == '__main__':
     train_col = [1, 2, 3, 4, 5, 6, 7]
 
     #read the data and return a numpy matrix
-    train_data, error_count = readData(small_data)
-    test_data, error_count = readData(small_data)
+    train_data, error_count = readData(mean_data)
+    test_data, error_count = readData(mean_data)
     print "max distance", numpy.matrix.max(train_data[:, 3])
     print "min distance", numpy.matrix.min(train_data[:, 3])
     print "file read completed!"
@@ -175,8 +175,7 @@ if __name__ == '__main__':
 
     #split the data into test and train set by every fourth data is test,
     #the others are the train data.
-    #(xTrain, xTest) = split_data(train_data 4)
-    #(yTrain, yTest) = split_data(train_data, 4)
+    #(train_data, test_data) = split_data(train_data, 4)
 
     #linear regression on the test data
     clf = linear_model.LinearRegression()
