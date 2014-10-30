@@ -10,13 +10,17 @@ NONWORDS = re.compile('[\W_]+')
 STOPWORDS = stopwords.words('english')
 
 # read in a file
-def scan(filename, exclude_stopwords = False, binary_label = False):
+def scan(filename, exclude_stopwords, binary_label):
     data = []
     with open(filename, 'r') as f:
+        count = 0
         while True:
             elements = {}
-
-            for line in f:
+            count += 1
+            #print count
+            if(count == 40000): break
+            
+            for line in f:            
                 if line == '\n':
                     break
                 try:

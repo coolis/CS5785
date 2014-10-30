@@ -1,0 +1,7 @@
+==================================Evaluation===========================
+Training Data: Train_Data.csv    Test Data: Top 10000 lines of Trip_Data_1.csv
+Root Mean Square Error: 448.23450213
+Mean Absolute Error: 279.0433
+Correlation Coefficient: 
+[[ 1.          0.68720671]
+ [ 0.68720671  1.        ]]
