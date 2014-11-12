@@ -1,4 +1,4 @@
-__author__ = 'aub3'
+__author__ = 'wenli'
 
 import numpy as np
 import dateutil.parser
@@ -14,7 +14,7 @@ FLOAT_FILEDS = [8, 10, 11, 12, 13]
 #pick up time
 STRING_FILEDS = [5]
 
-def D():
+if __name__ == '__main__':
     rows = [row for row in load_csv_lazy(TRAIN_DATA,STRING_FILEDS,FLOAT_FILEDS)]
     train_data = []
     for row in rows:
@@ -52,6 +52,3 @@ def D():
     neigh.fit(train_data[:,[1,2,3,4,5,6]], train_data[:,0])
     
     ols,rmse,mae,corr = scores(neigh, test_data[:,[1,2,3,4,5,6]], test_data[:,0])
-
-if __name__ == '__main__':
-    D()

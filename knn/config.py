@@ -1,10 +1,11 @@
-__author__ = 'aub3'
+__author__ = 'wenli'
 """
 All constants should go here.
 """
 
+import os
 
-DIR = "/Users/WayneLI/Desktop/CS5785/HW2/program1"
+DIR = os.path.dirname(__file__)
 EXAMPLE_DATA = DIR+"/data/example_data.csv" # small data files (ideally < 5 MB) should be stored in data folder
 TRIP_DATA_1 = DIR+"/data/trip_data_1.csv" # Large data files can be outside your directory structure
 TRIP_DATA_2 = DIR+"/data/trip_data_2.csv" # Large data files can be outside your directory structure
