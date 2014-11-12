@@ -23,3 +23,9 @@
 <li><a>Linear Regression</a></li>
 <li><a>K-nearest-neighbour</a></li>
 </ul>
+
+<h2>Run the code</h2>
+<ul>
+<li>Python version: Python 2.7.6+</li>
+<li>Required libraries: numpy and SciPy<li>
+
