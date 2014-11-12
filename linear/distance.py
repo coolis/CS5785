@@ -1,9 +1,18 @@
 #!/usr/bin/env python
-__author__ = 'aub3'
+__author__ = 'wenli'
 
 
 # code taken from
 import math
+import os
+import time
+import numpy
+import matplotlib.pyplot as pyplot
+from pprint import pprint
+from datetime import datetime
+
+dir = os.path.dirname(__file__)
+
 def get_distance(lat1, long1, lat2, long2):
     # Convert latitude and longitude to
     # spherical coordinates in radians.
@@ -35,26 +44,50 @@ def get_distance(lat1, long1, lat2, long2):
     return arc*3960.0
 
 if __name__ == '__main__':
-    from pprint import pprint
-    distances = []
+    trips = []
     error_count  = 0
-    for line in file('example_data.csv'):
+    for line in file(os.path.join(dir, 'example_data_no_header.csv')):
         line = line.strip().split(',')
         plong,plat,dlong,dlat=line[-4:]
         plong = float(plong)
         plat = float(plat)
         dlong = float(dlong)
         dlat = float(dlat)
+
+        #pick up time
+        ptime = float(time.mktime(datetime.strptime(line[5], "%Y-%m-%d %H:%M:%S").timetuple()))
+        #trip time in secs
+        ttime = float(line[8])
+        #trip distance
+        tdistance = float(line[9])
         try:
-            distances.append(get_distance(plat,plong,dlat,dlong))
+            #absolute displacement
+            trip = (ttime, ptime, tdistance, get_distance(plat,plong,dlat,dlong))
+            trips.append(trip)
         except:
             error_count += 1
             print plong,plat,dlong,dlat
             print error_count
+
     print error_count
-    distances.sort(reverse=True)
-    print "number of distances","maximum distance","minimum distance"
-    print len(distances),max(distances),min(distances) # distance is measured in miles
-    "Top 50 distances, obvious outliers"
-    pprint(distances[:50])
+
+    data = numpy.asmatrix(trips)
+
+    data[:,3].sort()
+    #print "number of distances","maximum distance","minimum distance"
+    print len(data[:,3]),max(data[:,3]),min(data[:,3]) # distance is measured in miles
+    #"Top 50 distances, obvious outliers"
+    #pprint(trips[:50])
+
+
+    color = ['r'] * data.shape[0]
+    #create the plot panel
+    fig = pyplot.figure()
+    ax = fig.add_subplot(3, 1, 1)
+    ax.scatter(data[:,0], data[:,1], c=color)
+    ax = fig.add_subplot(3, 1, 2)
+    ax.scatter(data[:,0], data[:,2], c=color)
+    ax = fig.add_subplot(3, 1, 3)
+    ax.scatter(data[:,0], data[:,3], c=color)
+    pyplot.show()
 
