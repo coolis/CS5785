@@ -27,5 +27,5 @@
 <h2>Run the code</h2>
 <ul>
 <li>Python version: Python 2.7.6+</li>
-<li>Required libraries: numpy and SciPy<li>
-
+<li>Required libraries: numpy and SciPy</li>
+</ul>
